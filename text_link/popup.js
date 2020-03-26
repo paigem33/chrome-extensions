@@ -9,7 +9,7 @@
 //     }
 // }, false)
 
-jQuery(function() {
+// jQuery(function() {
   
     jQuery('.dropdown > .caption').on('click', function() {
       jQuery(this).parent().toggleClass('open');
@@ -31,5 +31,20 @@ jQuery(function() {
         jQuery('.dropdown').removeClass('open');
       }
     });
+
+    jQuery('#my_info').on('click', function() {
+      jQuery('.popup_main').hide();
+      jQuery('.popup_info').show();
+    });
+
+    jQuery('#my_contacts').on('click', function() {
+      jQuery('.popup_main').hide();
+      jQuery('.popup_contacts').show();
+    });
+
+    jQuery('.back').on('click', function() {
+      jQuery('.popup_info, .popup_contacts').hide();
+      jQuery('.popup_main').show();
+    })
     
-  });
+  // });

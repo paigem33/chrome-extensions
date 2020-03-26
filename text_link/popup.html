@@ -10,8 +10,10 @@
 </head>
 <body>
 
+
     <h1>Text Link</h1>
 
+<div class="popup_main">
     <p>Send to:</p>
     <div class="container">
         <div class="dropdown">
@@ -27,10 +29,30 @@
       </div>
 
     <div class="menu">
-        <a href="#">My Info</a>
-        <a href="#">My Contacts</a>
+        <a href="#" id="my_info">My Info</a>
+        <a href="#" id="my_contacts">My Contacts</a>
     </div>
+</div>
 
+<div class="popup_info">
+
+  <label for="email">Send from:</label>
+  <input type="email" id="email"> 
+  <button>Update</button>
+
+  <a href="#" class="back">Back</a>
+
+</div>
+
+<div class="popup_contacts">
+
+  <label for="contacts">Contacts</label>
+  <input type="text" id="contacts"> 
+  <button>Update</button>
+
+  <a href="#" class="back">Back</a>
+
+</div>
     
     <script src="popup.js"></script>
 </body>
