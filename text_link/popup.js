@@ -46,5 +46,70 @@
       jQuery('.popup_info, .popup_contacts').hide();
       jQuery('.popup_main').show();
     })
+
+
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector('#test').addEventListener('click', getCurrentTabAndUrl);
+
+});
+
+function getCurrentTabAndUrl() {
+
+  chrome.tabs.getSelected(null, function(tab) {
+
+        var tabId = tab.id;
+        var tabTitle=tab.title;
+        var tabUrl = tab.url;
+        if (tabUrl=="chrome://newtab/") {
+          //document.getElementById("data").innerHTML="Looks like you opened a new tab, please open a web page and click again to Share.";
+        }else {
+        //document.getElementById("data").innerHTML="subject="+tabTitle+'<br/>'+tabUrl;
+
+        //var to=document.getElementById("to").value;
+
+
+        sendMessage('me','paigemacgregor33@gmail.com',tabTitle,tabUrl);
+
+        }
+    });
+}
+
+    function sendMessage(userId, to, subject, email) {
+      authUser(function() {
+          var base64EncodedEmail = btoa(email);
+          var request = gapi.client.gmail.users.messages.send({
+              'userId': userId,
+              'message': {
+                  'raw': base64EncodedEmail,
+                  'headers': [
+                      {'To': to}, 
+                      {'Subject': subject}
+                  ]
+              }
+          });
+          request.execute();
+      });
+  }
+  
+  //how to get if going this route?
+  function authUser(callback) {
+      chrome.identity.getAuthToken({'interactive': true}, function(token) {
+          // load Google's javascript client libraries
+          var url = "https://www.googleapis.com/gmail/v1/users/me/messages/send?access_token=" + token;
+          var request = new XMLHttpRequest();
+          request.onreadystatechange = function() {
+              if (request.readyState !== 4 || request.status !== 200) {
+                  return;
+              }
+              var response = JSON.parse(request.responseText);
+              console.log(response);
+              callback();
+          }
+          ;
+          request.open('POST', url, true);
+          request.send();
+          request.setRequestHeader('Authorization', 'Bearer ' + token);
+      });
+  }
     
   // });

@@ -1,4 +1,3 @@
-// alert("hello!");
-// chrome.runtime.onMessage.addListener(function (request){
+chrome.runtime.onMessage.addListener(function (request){
     
-// })
+})
